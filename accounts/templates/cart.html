@@ -1,0 +1,121 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Cart</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}?v=11">
+</head>
+<body>
+{% if messages %}
+    {% for message in messages %}
+        <div class="toast-popup">
+            <span>✅</span>
+            <span>{{ message }}</span>
+            <button type="button"
+                    onclick="this.parentElement.remove()">×</button>
+        </div>
+    {% endfor %}
+{% endif %}
+<div class="home-container">
+
+    <header class="home-header">
+        <h1>My Cart 🛒</h1>
+    </header>
+
+
+
+
+    {% if cart_items %}
+        <div class="restaurant-grid">
+
+            {% for item in cart_items %}
+                <div class="restaurant-card">
+
+                    {% if item.food.image and item.food.image.name %}
+                        <img
+                            src="{{ item.food.image.url }}"
+                            alt="{{ item.food.name }}"
+                            class="food-image"
+                        >
+                    {% endif %}
+
+                    <h3>{{ item.food.name }}</h3>
+
+                    <p>{{ item.food.description }}</p>
+
+                    <p>Price: ₹{{ item.food.price|floatformat:2 }}</p>
+
+                    <p>Quantity: {{ item.quantity }}</p>
+
+                    <div class="quantity-buttons">
+
+                        <form method="POST"
+                              action="{% url 'update_quantity' item.id 'decrease' %}">
+                            {% csrf_token %}
+                            <button type="submit">−</button>
+                        </form>
+
+                        <form method="POST"
+                              action="{% url 'update_quantity' item.id 'increase' %}">
+                            {% csrf_token %}
+                            <button type="submit">+</button>
+                        </form>
+
+                    </div>
+
+                    <p class="food-price">
+                        Subtotal: ₹{{ item.subtotal|floatformat:2 }}
+                    </p>
+
+                    <form method="POST"
+                          action="{% url 'remove_from_cart' item.id %}">
+                        {% csrf_token %}
+                        <button type="submit" class="remove-button">
+                            🗑️ Remove
+                        </button>
+                    </form>
+
+                </div>
+            {% endfor %}
+
+        </div>
+
+        <h2 class="section-title">
+            Total: ₹{{ total|floatformat:2 }}
+        </h2>
+        
+
+    {% else %}
+        <p>Your cart is empty.</p>
+    {% endif %}
+
+    
+<div class="menu-footer">
+    <a href="{% url 'home' %}" class="back-restaurants-btn">
+        <span>←</span> Continue Shopping
+    </a>
+</div>
+    <a href="{% url 'checkout' %}" class="checkout-button">
+        Proceed to Checkout →
+    </a>
+
+
+</div>
+
+<script>
+    document.querySelectorAll('.toast-popup').forEach(function (popup) {
+        setTimeout(function () {
+            popup.classList.add('hide');
+
+            setTimeout(function () {
+                popup.remove();
+            }, 400);
+        }, 3000);
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,71 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Delivery Address</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+
+    <style>
+       
+    </style>
+</head>
+
+<body>
+
+<div class="address-container">
+
+    <h2>📍 Add Delivery Address</h2>
+    <p>Where should we deliver your delicious food?</p>
+
+    {% if messages %}
+        {% for message in messages %}
+            <p>{{ message }}</p>
+        {% endfor %}
+    {% endif %}
+
+    <form method="POST">
+        {% csrf_token %}
+
+        <div class="address-group">
+            <label>Full Address</label>
+            <textarea name="address" rows="3"
+                      placeholder="House number, street, area"
+                      required></textarea>
+        </div>
+
+        <div class="address-group">
+            <label>City</label>
+            <input type="text" name="city"
+                   placeholder="Enter your city" required>
+        </div>
+
+        <div class="address-group">
+            <label>PIN Code</label>
+            <input type="text" name="pincode"
+                   placeholder="Enter PIN code"
+                   pattern="[0-9]{6}" maxlength="6" required>
+        </div>
+
+        <div class="address-group">
+            <label>Phone Number</label>
+            <input type="tel" name="phone"
+                   placeholder="Enter phone number"
+                   pattern="[0-9]{10}" maxlength="10" required>
+        </div>
+
+        <button type="submit" class="save-address">
+            Save Address
+        </button>
+    </form>
+
+    <a href="{% url 'checkout' %}" class="back-link">
+        ← Back to Checkout
+    </a>
+
+</div>
+
+</body>
+</html>

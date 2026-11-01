@@ -1,0 +1,139 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout | Food Delivery</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+
+
+</head>
+
+<body>
+
+<div class="checkout-page">
+
+    <div class="checkout-heading">
+        <h1>Complete Your Order 🛒</h1>
+        <p>Just a few steps away from enjoying your favourite food.</p>
+    </div>
+
+    <div class="checkout-progress">
+        <span>✓ Cart</span>
+        <div class="progress-line"></div>
+        <span>2. Checkout</span>
+        <div class="progress-line"></div>
+        <span>3. Order</span>
+    </div>
+
+    <form method="POST">
+        {% csrf_token %}
+
+        <div class="checkout-layout">
+
+            <!-- LEFT SIDE -->
+            <div>
+<div class="checkout-card">
+    <h2>📍 Delivery Address</h2>
+
+    <a href="{% url 'add_to_address' %}" class="add-address-btn">
+        + Add New Address
+    </a>
+
+                    {% for address in addresses %}
+                        <label class="address-option">
+                            <input
+                                type="radio"
+                                name="address"
+                                value="{{ address.id }}"
+                                required
+                            >
+
+                            <div class="address-details">
+                                <strong>Delivery Address {{ forloop.counter }}</strong>
+                                <p>{{ address.address }}</p>
+                                <p>{{ address.city }} - {{ address.pincode }}</p>
+                                <p>📞 {{ address.phone }}</p>
+                            </div>
+                        </label>
+                    {% empty %}
+                        <div class="empty-address">
+                            No saved addresses found. Please add an address before checkout.
+                        </div>
+                    {% endfor %}
+                </div>
+
+                <div class="checkout-card">
+                    <h2>🍔 Your Order Items</h2>
+
+                    {% for item in cart_items %}
+                        <div class="checkout-item">
+
+                            {% if item.food.image %}
+                                <img src="{{ item.food.image.url }}"
+                                     alt="{{ item.food.name }}">
+                            {% endif %}
+
+                            <div class="checkout-item-details">
+                                <h3>{{ item.food.name }}</h3>
+                                <p>Quantity: {{ item.quantity }}</p>
+                                <p>₹{{ item.food.price|floatformat:2 }} each</p>
+                            </div>
+
+                            <div class="checkout-item-details">
+                                <p class="checkout-price">
+                                    ₹{{ item.food.price|floatformat:2 }}
+                                </p>
+                            </div>
+
+                        </div>
+                    {% endfor %}
+                </div>
+
+            </div>
+
+            <!-- RIGHT SIDE -->
+            <div>
+                <div class="checkout-card">
+                    <h2>🧾 Bill Summary</h2>
+
+                    <div class="bill-row">
+                        <span>Items ({{ cart_items|length }})</span>
+                        <span>₹{{ total|floatformat:2 }}</span>
+                    </div>
+
+                    <div class="bill-row">
+                        <span>Delivery Fee</span>
+                        <span>Not included</span>
+                    </div>
+
+                    <div class="bill-row bill-total">
+                        <span>Total Amount</span>
+                        <span>₹{{ total|floatformat:2 }}</span>
+                    </div>
+
+                    {% if addresses %}
+                        <button type="submit" class="place-order-btn">
+                            Place Order →
+                        </button>
+                    {% else %}
+                        <button type="button" class="place-order-btn" disabled>
+                            Add Delivery Address First
+                        </button>
+                    {% endif %}
+
+                    <a href="{% url 'view_cart' %}" class="back-cart">
+                        ← Back to Cart
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </form>
+
+</div>
+
+</body>
+</html>

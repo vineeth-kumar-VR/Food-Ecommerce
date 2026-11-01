@@ -1,0 +1,60 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Delivery - Home</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}?v=2">
+</head>
+<body>
+
+    <div class="home-container">
+
+        <header class="home-header">
+            <div>
+                <h1>Food Delivery</h1>
+                <p>Discover delicious food near you!</p>
+            </div>
+
+            <div class="welcome-user">
+                Welcome, {{ request.user.username|default:"Guest" }}!
+            </div>
+        </header>
+
+        <h2 class="section-title">Available Restaurants</h2>
+
+        <div class="restaurant-grid">
+
+            {% for restaurant in restaurants %}
+                <div class="restaurant-card">
+
+                    <div class="restaurant-icon">🍽️</div>
+
+                    <h3>{{ restaurant.name }}</h3>
+
+                    <p class="restaurant-description">
+                        {{ restaurant.description }}
+                    </p>
+
+                    <p>📍 {{ restaurant.location }}</p>
+
+                    <p>⭐ {{ restaurant.rating }}</p>
+
+                    <a class="restaurant-button"
+                       href="{% url 'restaurant_detail' restaurant.id %}">
+                        View Menu →
+                    </a>
+
+                </div>
+            {% empty %}
+                <p>No restaurants available right now.</p>
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+</body>
+</html>
