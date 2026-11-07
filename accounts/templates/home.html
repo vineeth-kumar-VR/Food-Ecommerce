@@ -13,10 +13,10 @@
     <div class="home-container">
 
         <header class="home-header">
-            <div>
-                <h1>Food Delivery</h1>
-                <p>Discover delicious food near you!</p>
-            </div>
+<a href="{% url 'my_order' %}" class="orders-icon" title="My Orders">
+    <span>📦</span>
+</a>
+
 
             <div class="welcome-user">
                 Welcome, {{ request.user.username|default:"Guest" }}!

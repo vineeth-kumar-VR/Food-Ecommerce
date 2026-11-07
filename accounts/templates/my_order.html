@@ -1,0 +1,133 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Orders | Food Delivery</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <div class="logo">Food Delivery</div>
+        <a href="{% url 'home' %}" class="back-link">← Back to Home</a>
+    </nav>
+
+    <main class="my-orders-container">
+
+        <div class="page-heading">
+            <h1>My Orders</h1>
+            <p>Track and view your previous food orders.</p>
+        </div>
+
+        {% for order in orders %}
+
+        <div class="order-card">
+
+            <div class="order-header">
+                <div>
+                    <div class="order-number">
+                        Order #{{ order.id }}
+                    </div>
+
+                    <div class="order-date">
+                        {{ order.created_at|date:"d M Y, h:i A" }}
+                    </div>
+                </div>
+
+                <span class="status">
+                    {{ order.status|title }}
+                </span>
+            </div>
+
+            <div class="order-info">
+
+                <div>
+                    <div class="info-label">Restaurant</div>
+                    <div class="info-value">
+                        {{ order.restaurant.name }}
+                    </div>
+                </div>
+
+                <div>
+                    <div class="info-label">Delivery Address</div>
+                    <div class="info-value">
+                        {{ order.address.city }}
+                    </div>
+                </div>
+
+            </div>
+
+            <h3 class="items-heading">Ordered Items</h3>
+
+{% for item in order.items.all %}
+            <div class="item-row">
+
+                <div>
+                    <div class="item-name">
+                        {{ item.food.name }}
+                    </div>
+
+                    <div class="item-quantity">
+                        Quantity: {{ item.quantity }}
+                    </div>
+                </div>
+
+                <div class="item-price">
+                    ₹{{ item.price|floatformat:2 }}
+                </div>
+
+            </div>
+
+            {% empty %}
+
+            <p class="no-items">
+                No items found for this order.
+            </p>
+
+            {% endfor %}
+
+            <div class="order-total">
+                <span>Total Amount</span>
+
+                <span class="total-amount">
+                    ₹{{ order.total_amount|floatformat:2 }}
+                </span>
+            </div>
+
+            <div class="order-actions">
+                <a href="{% url 'order_detail' order.id %}"
+                   class="view-order-btn">
+                    View Order Details →
+                </a>
+            </div>
+
+        </div>
+
+        {% empty %}
+
+        <div class="empty-orders">
+
+            <div class="empty-icon">🛍️</div>
+
+            <h2>No Orders Yet!</h2>
+
+            <p>
+                You haven't placed any orders.
+                Explore restaurants and order your favourite food.
+            </p>
+
+            <a href="{% url 'home' %}" class="shop-btn">
+                Explore Restaurants
+            </a>
+
+        </div>
+
+        {% endfor %}
+
+    </main>
+
+</body>
+</html>

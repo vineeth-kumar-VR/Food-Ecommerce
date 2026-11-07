@@ -2,7 +2,7 @@
 from decimal import Decimal
 
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 
 from carts.models import Cart
@@ -121,4 +121,31 @@ def add_to_address(request):
         messages.success(request, "Address Added Successfully")
         return redirect("checkout")
     return render(request, "address.html")
+
+@login_required
+def my_order(request):
+    print("logged_in_user:", request.user, request.user.id)
+
+    orders = Order.objects.filter(
+        user=request.user
+    ).prefetch_related(
+        'items__food'
+    ).order_by('-created_at')
+
+    print("order_count:", orders.count())
+
+    return render(request, 'my_order.html', {
+        'orders': orders
+    })
+    
+@login_required
+def order_detail(request, order_id):
+    order = get_object_or_404(
+        Order,
+        id = order_id,
+        user =request.user
+    )
+    return render(request, "order_detail.html",{
+        "order":order
+    })
     
