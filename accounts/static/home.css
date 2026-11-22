@@ -1,0 +1,169 @@
+/* =========================
+   HOME PAGE
+========================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #140b24, #24113d, #321653);
+    color: #f5efff;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+/* Home Container */
+.home-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px 10px;
+}
+
+/* Home Header */
+.home-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-bottom: 40px;
+}
+
+.home-header h1 {
+    color: #c9a0ff;
+    font-size: 32px;
+    margin-bottom: 10px;
+}
+
+.home-header p {
+    color: #b9a7cc;
+}
+
+/* Welcome User */
+.welcome-user {
+    color: #e3d2ff;
+    background: #291b3b;
+    padding: 12px 18px;
+    border-radius: 10px;
+    border: 1px solid #493064;
+}
+
+/* Section Title */
+.section-title {
+    color: #e3d2ff;
+    margin-bottom: 22px;
+    font-size: 25px;
+}
+
+/* Restaurant Grid */
+.restaurant-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px;
+    width: 100%;
+    align-items: stretch;
+}
+
+/* Restaurant Cards */
+.restaurant-card {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    min-width: 0;
+    background: #20132f;
+    border: 1px solid #493064;
+    border-radius: 16px;
+    padding: 25px;
+    transition: transform 0.3s, border-color 0.3s;
+}
+
+.restaurant-card:hover {
+    transform: translateY(-5px);
+    border-color: #a855f7;
+}
+
+.restaurant-icon {
+    font-size: 38px;
+    margin-bottom: 16px;
+}
+
+.restaurant-card h3 {
+    color: #d6b5ff;
+    font-size: 21px;
+    margin-bottom: 12px;
+    overflow-wrap: anywhere;
+}
+
+.restaurant-card p {
+    color: #c9b8dc;
+    margin-bottom: 12px;
+    line-height: 1.5;
+}
+
+.restaurant-description {
+    min-height: 42px;
+}
+
+/* Restaurant Button */
+.restaurant-button {
+    display: block;
+    width: 100%;
+    margin-top: auto;
+    padding: 12px;
+    border-radius: 9px;
+    background: linear-gradient(135deg, #9333ea, #7c3aed);
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    font-weight: bold;
+    overflow-wrap: anywhere;
+    transition: 0.3s;
+}
+
+.restaurant-button:hover {
+    background: linear-gradient(135deg, #a855f7, #8b5cf6);
+}
+
+/* Responsive Layout */
+@media (max-width: 768px) {
+    .restaurant-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 500px) {
+    body {
+        padding: 12px;
+    }
+
+    .home-container {
+        padding: 15px 5px;
+    }
+
+    .home-header {
+        align-items: flex-start;
+        flex-direction: column;
+        margin-bottom: 30px;
+    }
+
+    .home-header h1 {
+        font-size: 28px;
+    }
+
+    .section-title {
+        font-size: 22px;
+    }
+
+    .restaurant-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .restaurant-card {
+        padding: 20px;
+    }
+}

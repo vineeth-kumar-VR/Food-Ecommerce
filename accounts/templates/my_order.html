@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Orders | Food Delivery</title>
-    <link rel="stylesheet" href="{% static 'style.css' %}">
+<link rel="stylesheet" href="{% static 'my_order.css' %}?v=6">
 </head>
 
 <body>
@@ -89,13 +89,13 @@
 
             {% endfor %}
 
-            <div class="order-total">
-                <span>Total Amount</span>
+<div class="order-total">
+    <div class="total-label">TOTAL AMOUNT</div>
 
-                <span class="total-amount">
-                    ₹{{ order.total_amount|floatformat:2 }}
-                </span>
-            </div>
+    <div class="total-amount">
+        ₹{{ order.total_amount|floatformat:2 }}
+    </div>
+</div>
 
             <div class="order-actions">
                 <a href="{% url 'order_detail' order.id %}"

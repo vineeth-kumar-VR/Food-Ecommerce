@@ -1,0 +1,324 @@
+/* ==============================
+   GLOBAL STYLES
+============================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #140b24, #24113d, #321653);
+    color: #f5efff;
+}
+
+/* ==============================
+   HOME CONTAINER
+============================== */
+
+.home-container {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 35px 30px;
+}
+
+/* ==============================
+   RESTAURANT HEADER
+============================== */
+
+.home-header {
+    width: 100%;
+    padding: 35px;
+    margin-bottom: 35px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+
+    background: #20132f;
+    border: 1px solid #493064;
+    border-radius: 16px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+.home-header h1 {
+    font-size: 32px;
+    font-weight: 700;
+    color: #ffffff;
+}
+
+.home-header p {
+    font-size: 15px;
+    line-height: 1.6;
+    color: #c8b8dc;
+}
+
+/* ==============================
+   SECTION TITLE
+============================== */
+
+.section-title {
+    margin-bottom: 25px;
+    font-size: 26px;
+    color: #ffffff;
+}
+
+/* ==============================
+   RESTAURANT GRID
+   FOOD CARDS SIDE BY SIDE
+============================== */
+
+.restaurant-grid {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 25px;
+    align-items: stretch;
+}
+
+/* ==============================
+   FOOD CARD
+============================== */
+
+.restaurant-card {
+    min-width: 0;
+    width: 100%;
+    padding: 18px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 13px;
+
+    background: #20132f;
+    border: 1px solid #493064;
+    border-radius: 15px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+
+    transition: transform 0.3s, border-color 0.3s;
+}
+
+.restaurant-card:hover {
+    transform: translateY(-5px);
+    border-color: #8b5cf6;
+}
+
+/* ==============================
+   FOOD IMAGE
+============================== */
+
+.food-image {
+    width: 100%;
+    height: 210px;
+    display: block;
+    object-fit: cover;
+    border-radius: 10px;
+    background: #382451;
+}
+
+.food-image-placeholder {
+    width: 100%;
+    height: 210px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: #382451;
+    border: 1px solid #493064;
+    border-radius: 10px;
+    font-size: 55px;
+}
+
+/* ==============================
+   FOOD DETAILS
+============================== */
+
+.restaurant-card h3 {
+    font-size: 20px;
+    color: #ffffff;
+    font-weight: 700;
+}
+
+.restaurant-description {
+    font-size: 14px;
+    line-height: 1.6;
+    color: #bcaaca;
+    overflow-wrap: anywhere;
+}
+
+.food-price {
+    font-size: 21px;
+    font-weight: 700;
+    color: #d8baff;
+}
+
+/* ==============================
+   AVAILABILITY
+============================== */
+
+.available,
+.unavailable {
+    width: fit-content;
+    padding: 7px 13px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.available {
+    background: rgba(34, 197, 94, 0.15);
+    color: #4ade80;
+}
+
+.unavailable {
+    background: rgba(239, 68, 68, 0.15);
+    color: #f87171;
+}
+
+/* ==============================
+   ADD TO CART BUTTON
+============================== */
+
+.restaurant-button {
+    width: 100%;
+    margin-top: auto;
+    padding: 13px 15px;
+
+    border: none;
+    border-radius: 9px;
+
+    background: #6c3ce9;
+    color: #ffffff;
+
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+
+    transition: background 0.3s, transform 0.3s;
+}
+
+.restaurant-button:hover {
+    background: #5125c9;
+    transform: translateY(-2px);
+}
+
+/* ==============================
+   MENU FOOTER
+============================== */
+
+.menu-footer {
+    width: 100%;
+    margin-top: 40px;
+    padding-top: 25px;
+    border-top: 1px solid #493064;
+}
+
+.back-restaurants-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+
+    padding: 13px 22px;
+    border-radius: 9px;
+
+    background: #382451;
+    border: 1px solid #75549a;
+
+    color: #d8baff;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 600;
+
+    transition: 0.3s;
+}
+
+.back-restaurants-btn:hover {
+    background: #6c3ce9;
+    color: #ffffff;
+}
+
+.back-restaurants-btn span {
+    font-size: 20px;
+}
+
+/* ==============================
+   RESPONSIVE DESIGN
+============================== */
+
+@media (max-width: 1000px) {
+    .restaurant-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 600px) {
+    .home-container {
+        padding: 20px 14px;
+    }
+
+    .home-header {
+        padding: 22px;
+    }
+
+    .home-header h1 {
+        font-size: 25px;
+    }
+
+    .section-title {
+        font-size: 22px;
+    }
+
+    .restaurant-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .restaurant-card {
+        padding: 15px;
+    }
+
+    .food-image,
+    .food-image-placeholder {
+        height: 190px;
+    }
+}
+
+/* Restaurant Detail - Force Grid Layout */
+
+.home-container .restaurant-grid {
+    display: grid !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    width: 100% !important;
+    gap: 25px !important;
+}
+
+.home-container .restaurant-grid .restaurant-card {
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    box-sizing: border-box !important;
+}
+
+/* Tablet */
+
+@media (max-width: 1000px) {
+    .home-container .restaurant-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    }
+}
+
+/* Mobile */
+
+@media (max-width: 600px) {
+    .home-container .restaurant-grid {
+        grid-template-columns: 1fr !important;
+    }
+}

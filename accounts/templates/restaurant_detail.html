@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ restaurant.name }} - Menu</title>
 
-    <link rel="stylesheet" href="{% static 'style.css' %}?v=12">
+    <link rel="stylesheet" href="{% static 'restaurant_detail.css' %}?v=2">
 </head>
 <body>
 
@@ -50,23 +50,19 @@
                         ₹{{ food.price }}
                     </p>
 
-                    {% if food.is_available %}
-                        <p class="available">Available</p>
+{% if food.is_available %}
+    <p class="available">Available</p>
 
-                        <form method="POST"
-                              action="{% url 'add_to_cart' food.id %}">
-                            {% csrf_token %}
+    <form method="POST" action="{% url 'add_to_cart' food.id %}">
+        {% csrf_token %}
+        <button type="submit" class="restaurant-button">
+            🛒 Add to Cart
+        </button>
+    </form>
+{% else %}
+    <p class="unavailable">Unavailable</p>
+{% endif %}
 
-                     <form method="POST" action="{% url 'add_to_cart' food.id %}">
-    {% csrf_token %}
-    <button type="submit" class="restaurant-button">
-        🛒 Add to Cart
-    </button>
-</form>
-                        </form>
-                    {% else %}
-                        <p class="unavailable">Unavailable</p>
-                    {% endif %}
 
                 </div>
             {% empty %}

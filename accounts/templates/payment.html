@@ -1,0 +1,163 @@
+
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>UPI Demo Payment | Food Delivery</title>
+
+    <link rel="stylesheet" href="{% static 'payment.css' %}?v=3">
+</head>
+
+<body>
+
+<div class="main-container">
+
+    <header class="navbar">
+        <div class="logo">
+            <span class="logo-icon">🍔</span>
+            <h2>Food Delivery</h2>
+        </div>
+
+        <span class="secure-label">🔒 Secure Demo Checkout</span>
+    </header>
+
+    <div class="payment-wrapper">
+
+        <div class="payment-heading">
+            <h1>Complete Your Payment</h1>
+            <p>Choose UPI and complete your demo transaction.</p>
+        </div>
+
+        <div class="payment-layout">
+
+            <div class="payment-card">
+
+                <div class="section-heading">
+                    <h2>UPI Payment</h2>
+                    <p>Simple demo payment for testing your order.</p>
+                </div>
+
+                <div class="upi-options">
+
+                    <div class="upi-option active">
+                        <span class="option-icon">📱</span>
+                        <div>
+                            <h3>UPI Demo</h3>
+                            <p>Simulated payment</p>
+                        </div>
+                        <span class="selected-icon">✓</span>
+                    </div>
+
+                    <div class="upi-option">
+                        <span class="option-icon">💳</span>
+                        <div>
+                            <h3>Online Demo</h3>
+                            <p>Test on any device</p>
+                        </div>
+                    </div>
+
+                </div>
+
+                <form method="POST">
+                    {% csrf_token %}
+
+                    <div class="input-section">
+                        <label for="upi_id">Demo UPI ID</label>
+
+                        <input
+                            type="text"
+                            id="upi_id"
+                            name="upi_id"
+                            placeholder="demo@upi"
+                            value="demo@upi"
+                            required
+                        >
+
+                        <small>
+                            Testing only. No real UPI transaction will happen.
+                        </small>
+                    </div>
+
+                    <div class="demo-notice">
+                        <span>🛡️</span>
+                        <div>
+                            <strong>Demo Payment Environment</strong>
+                            <p>
+                                This payment is simulated by your website.
+                                No bank account or UPI application is required.
+                            </p>
+                        </div>
+                    </div>
+
+                    <button
+                        type="submit"
+                        name="payment_status"
+                        value="success"
+                        class="pay-button">
+                        Pay ₹{{ total }}
+                        <span>→</span>
+                    </button>
+
+                    <button
+                        type="submit"
+                        name="payment_status"
+                        value="failed"
+                        class="failure-button">
+                        Simulate Payment Failure
+                    </button>
+
+                </form>
+
+            </div>
+
+            <div class="summary-card">
+
+                <h2>Order Summary</h2>
+
+                <div class="summary-icon">🛒</div>
+
+                <p class="summary-label">Total Amount</p>
+
+                <h1 class="total-amount">₹{{ total }}</h1>
+
+                <div class="summary-divider"></div>
+
+                <div class="summary-row">
+                    <span>Payment Method</span>
+                    <strong>UPI Demo</strong>
+                </div>
+
+                <div class="summary-row">
+                    <span>Transaction Type</span>
+                    <strong>Test</strong>
+                </div>
+
+                <div class="summary-divider"></div>
+
+                <div class="summary-security">
+                    🔐 No real money is transferred.
+                    This is only a simulated payment.
+                </div>
+
+                <a href="{% url 'checkout' %}" class="back-link">
+                    ← Back to Checkout
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <footer>
+        <p>© Food Delivery | Demo Payment Gateway</p>
+    </footer>
+
+</div>
+
+</body>
+</html>

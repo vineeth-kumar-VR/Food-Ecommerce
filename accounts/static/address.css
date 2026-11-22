@@ -1,0 +1,90 @@
+/* Address Page */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #140b24, #24113d, #321653);
+    color: #f5efff;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.address-container {
+    max-width: 550px;
+    margin: 50px auto;
+    padding: 30px;
+    background: #20132f;
+    border-radius: 15px;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.08);
+}
+
+.address-container h2 {
+    color: #6c3ce9;
+    margin-bottom: 10px;
+}
+
+.address-container p {
+    color: #777;
+    margin-bottom: 25px;
+}
+
+.address-group {
+    margin-bottom: 18px;
+}
+
+.address-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+.address-group input,
+.address-group textarea {
+    width: 100%;
+    padding: 13px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-sizing: border-box;
+    font-size: 14px;
+}
+
+.address-group input:focus,
+.address-group textarea:focus {
+    outline: none;
+    border-color: #6c3ce9;
+}
+
+.save-address {
+    width: 100%;
+    padding: 14px;
+    background: #6c3ce9;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.save-address:hover {
+    background: #5125c9;
+}
+
+.back-link {
+    display: block;
+    text-align: center;
+    margin-top: 20px;
+    color: #6c3ce9;
+    text-decoration: none;
+}
+
+@media (max-width: 600px) {
+    .address-container {
+        margin: 20px 12px;
+        padding: 22px;
+    }
+}
